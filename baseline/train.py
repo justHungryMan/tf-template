@@ -3,11 +3,7 @@ import datetime
 import time
 import os
 import math
-from typing import List, Optional
-
 import tensorflow as tf
-import hydra
-from omegaconf import DictConfig
 
 import baseline
 from baseline.utils import get_logger
@@ -61,7 +57,7 @@ class Trainer:
                 optimizer=optimizer,
                 loss=loss_fn,
                 metrics=["accuracy"],
-                steps_per_execution=steps_per_epoch if self.debug is False else 1,
+                steps_per_execution=1 if self.debug else steps_per_epoch,
             )
             tf.keras.backend.set_value(model.optimizer.iterations, 0)
             log.info(f"Model Completed...")
