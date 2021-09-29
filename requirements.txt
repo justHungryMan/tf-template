@@ -1,9 +1,12 @@
 tensorflow-gpu==2.6.0
 tensorflow-probability
 tensorflow-datasets
+tensorflow-addons
 
 hydra-core
 hydra_colorlog
 omegaconf
 cloud-tpu-client
+
+black
 rich

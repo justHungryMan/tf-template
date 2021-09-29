@@ -1,7 +1,8 @@
 import hydra
 from omegaconf import DictConfig
 
-@hydra.main(config_path='conf', config_name='config.yaml')
+
+@hydra.main(config_path="conf", config_name="config.yaml")
 def main(conf: DictConfig) -> None:
 
     # Imports should be nested inside @hydra.main to optimize tab completion
@@ -9,13 +10,14 @@ def main(conf: DictConfig) -> None:
     from baseline import utils
     from baseline import Trainer
 
-    utils.set_environment(conf)
+    conf = utils.set_environment(conf)
 
-    if conf.base.get('print_config', False):
+    if conf.base.get("print_config", False):
         utils.print_config(conf, resolve=True)
 
     trainer = Trainer(conf)
     return trainer.run()
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main()

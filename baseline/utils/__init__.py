@@ -1,3 +1,4 @@
+import copy
 import logging
 import sys
 import os
@@ -11,18 +12,21 @@ import rich.syntax
 import rich.tree
 from omegaconf import DictConfig, OmegaConf
 
-from . import strategy
-from . import callback
 
 def get_logger(name=__name__, level=logging.INFO) -> logging.Logger:
-    logging.basicConfig(level=logging.INFO, format='[%(asctime)s] [%(levelname)s] %(message)s', stream=sys.stderr)
+    logging.basicConfig(
+        level=logging.INFO,
+        format="[%(asctime)s] [%(levelname)s] %(message)s",
+        stream=sys.stderr,
+    )
     logger = logging.getLogger(name)
-    
+
     logger.setLevel(level)
 
     # tf.get_logger().setLevel(logging.WARNING)
 
     return logger
+
 
 def set_environment(config: DictConfig) -> None:
     """A couple of optional utilities, controlled by main config file:
@@ -44,8 +48,29 @@ def set_environment(config: DictConfig) -> None:
         log.info("Disabling python warnings! <config.base.ignore_warnings=True>")
         warnings.filterwarnings("ignore")
 
+    # Hyperparameter Set
+    new_conf = copy.deepcopy(config)
+    del new_conf.hyperparameter
+
+    replace_item(config.hyperparameter, new_conf)
+    config = new_conf
+
     # disable adding new keys to config
     OmegaConf.set_struct(config, True)
+
+    return config
+
+
+def replace_item(source, target):
+    """
+    Replaces the dictionary value of key with replace_value in the obj dictionary.
+    """
+    for key in source:
+        if isinstance(source[key], DictConfig):
+            replace_item(source[key], target[key])
+        else:
+            target[key] = source[key]
+
 
 def print_config(
     config: DictConfig,
@@ -82,12 +107,13 @@ def print_config(
 
     rich.print(tree)
 
-    with open("config_tree.txt", "w") as fp:
-        rich.print(tree, file=fp)
+    # with open("config_tree.txt", "w") as fp:
+    #     rich.print(tree, file=fp)
+
 
 def set_seed(seed):
     seed = int(seed, 0)
 
-    random.seed(conf.base.seed)
-    np.random.seed(conf.base.seed)
-    tf.random.set_seed(conf.base.seed)
+    random.seed(seed)
+    np.random.seed(seed)
+    tf.random.set_seed(seed)

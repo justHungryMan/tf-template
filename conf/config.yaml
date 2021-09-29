@@ -1,13 +1,14 @@
 defaults:
-  - architecture: bit50x1.yaml
-  - dataset: imagenet1k.yaml
-  - dataProcessing: temp.yaml
-  - loss: temp.yaml
-  - optimizer: temp.yaml
-  - scheduler: temp.yaml
+  - architecture: resnet50.yaml
+  - dataset: cifar10.yaml
+  - dataProcess: example.yaml
+  - loss: bce.yaml
+  - optimizer: sgd.yaml
+  - scheduler: warmup_piecewise.yaml
+  - hyperparameter: example.yaml
   - hydra: defaults.yaml
-  - callbacks: temp.yaml
-
+  - callbacks: base.yaml
+  
   - override hydra/job_logging: colorlog
   - override hydra/hydra_logging: colorlog
 
@@ -15,17 +16,18 @@ defaults:
 base:
   mode: train_eval
   # TPU options
-  env:
-    mode: tpu
-    gcp_project: tpu3
-    tpu_name: mnist
-    tpu_zone: europe-west4-a
-    mixed_precision: True
-  # GPU options
   # env:
-  #   mode: gpu
+  #   mode: tpu
+  #   gcp_project: tpu3
+  #   tpu_name: mnist
+  #   tpu_zone: europe-west4-a
   #   mixed_precision: True
+  # GPU options
+  env:
+    mode: gpu
+    mixed_precision: True
   seed: '0xC0FFEE'
+  save_dir: ./
   debug: True
   print_config: True
   ignore_warning: True
