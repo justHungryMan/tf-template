@@ -1,4 +1,5 @@
 defaults:
+  - _self_
   - architecture: resnet50.yaml
   - dataset: cifar10.yaml
   - dataProcess: example.yaml

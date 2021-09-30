@@ -36,14 +36,23 @@ def create(conf, conf_all):
         callbacks.append(create_callback(single_conf))
     return callbacks
 
-def replace_nested_dict(source, unnested_dict={}, unnested_keys=''):
+
+def replace_nested_dict(source, unnested_dict={}, unnested_keys=""):
     for idx, key in enumerate(source):
         if not isinstance(key, str):
             key = idx
         if isinstance(source[key], DictConfig):
-            unnested_dict = replace_nested_dict(source[key], unnested_dict=unnested_dict, unnested_keys=f"{unnested_keys}_{key}")
+            unnested_dict = replace_nested_dict(
+                source[key],
+                unnested_dict=unnested_dict,
+                unnested_keys=f"{unnested_keys}_{key}",
+            )
         elif isinstance(source[key], ListConfig):
-            unnested_dict = replace_nested_dict(source[key], unnested_dict=unnested_dict, unnested_keys=f"{unnested_keys}_{key}")
+            unnested_dict = replace_nested_dict(
+                source[key],
+                unnested_dict=unnested_dict,
+                unnested_keys=f"{unnested_keys}_{key}",
+            )
         else:
             unnested_dict[f"{unnested_keys}_{key}"] = source[key]
     return unnested_dict
