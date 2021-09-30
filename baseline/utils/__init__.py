@@ -75,6 +75,7 @@ def replace_item(source, target):
 def print_config(
     config: DictConfig,
     fields: Sequence[str] = (
+        "base",
         "architecture",
         "dataset",
         "optimizer",

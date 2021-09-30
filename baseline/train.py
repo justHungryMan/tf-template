@@ -91,7 +91,7 @@ class Trainer:
                     "%Y%m%d-%H%M%S"
                 )
 
-        callbacks = baseline.callback.create(self.conf.callbacks.modules)
+        callbacks = baseline.callback.create(conf=self.conf.callbacks.modules, conf_all=self.conf)
         return callbacks
 
     def train_eval(self, train_dataset, model, callbacks, kwargs, val_kwargs={}):
@@ -155,7 +155,7 @@ class Trainer:
                     / self.conf.dataset.test.batch_size
                 ),
             }
-            self.train_eval(
+            rc = self.train_eval(
                 train_dataset=datasets["train"],
                 model=model,
                 callbacks=callbacks,
@@ -164,3 +164,8 @@ class Trainer:
             )
         elif mode == "eval":
             pass
+        
+        log.info(f"{self.conf.base.name}: {self.conf.base.save_dir}")
+        log.info('[train] loss:{rv["history"]["loss"][-1]:.4f} accuracy:{rv["history"]["accuracy"][-1]*100:.2f} duration:{rv["duration"] / 60:.2f}min')
+        log.info(f'[valid] loss:{rv["history"]["val_loss"][-1]:.4f} accuracy:{rv["history"]["val_accuracy"][-1]*100:.2f}')
+        log.info(f'[valid] best accuracy:{max(rv["history"]["val_accuracy"]) * 100:.2f}')

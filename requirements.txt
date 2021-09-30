@@ -3,6 +3,7 @@ tensorflow-probability
 tensorflow-datasets
 tensorflow-addons
 
+wandb
 hydra-core
 hydra_colorlog
 omegaconf

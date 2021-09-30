@@ -14,6 +14,7 @@ defaults:
 
 
 base:
+  project_name: tf_framework
   mode: train_eval
   # TPU options
   # env:
@@ -27,7 +28,7 @@ base:
     mode: gpu
     mixed_precision: True
   seed: '0xC0FFEE'
-  save_dir: ./
+  save_dir: ./${base.project_name}
   debug: True
   print_config: True
   ignore_warning: True

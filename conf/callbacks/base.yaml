@@ -8,6 +8,9 @@ modules:
     params:
       filepath: ???
       save_weights_only: True
+  - type: Wandb
+    params: 
+      monitor: val_loss
   # - type: TensorBoard
   #   params:
   #     log_dir: ???
