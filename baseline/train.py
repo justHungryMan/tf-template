@@ -62,7 +62,7 @@ class Trainer:
             tf.keras.backend.set_value(model.optimizer.iterations, 0)
             log.info(f"Model Completed...")
         if self.debug:
-            model.summary()
+            model.summary(print_fn=log.info)
         return model
 
     def build_optimizer(self, model):
@@ -157,7 +157,7 @@ class Trainer:
                     / self.conf.dataset.test.batch_size
                 ),
             }
-            rc = self.train_eval(
+            rv = self.train_eval(
                 train_dataset=datasets["train"],
                 model=model,
                 callbacks=callbacks,
@@ -167,9 +167,9 @@ class Trainer:
         elif mode == "eval":
             pass
 
-        log.info(f"{self.conf.base.name}: {self.conf.base.save_dir}")
+        log.info(f"{self.conf.base.project_name}: {self.conf.base.save_dir}")
         log.info(
-            '[train] loss:{rv["history"]["loss"][-1]:.4f} accuracy:{rv["history"]["accuracy"][-1]*100:.2f} duration:{rv["duration"] / 60:.2f}min'
+            f'[train] loss:{rv["history"]["loss"][-1]:.4f} accuracy:{rv["history"]["accuracy"][-1]*100:.2f} duration:{rv["duration"] / 60:.2f}min'
         )
         log.info(
             f'[valid] loss:{rv["history"]["val_loss"][-1]:.4f} accuracy:{rv["history"]["val_accuracy"][-1]*100:.2f}'

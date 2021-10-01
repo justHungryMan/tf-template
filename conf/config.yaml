@@ -18,18 +18,18 @@ base:
   project_name: tf_framework
   mode: train_eval
   # TPU options
-  # env:
-  #   mode: tpu
-  #   gcp_project: tpu3
-  #   tpu_name: mnist
-  #   tpu_zone: europe-west4-a
-  #   mixed_precision: True
-  # GPU options
   env:
-    mode: gpu
+    mode: tpu
+    gcp_project: justhungryman
+    tpu_name: tf-framework
+    tpu_zone: europe-west4-a
     mixed_precision: True
+  # GPU options
+  # env:
+  #   mode: gpu
+  #   mixed_precision: True
   seed: '0xC0FFEE'
-  save_dir: ./${base.project_name}
+  save_dir: gs://justhungryman_tpu3/${base.project_name}
   debug: True
   print_config: True
   ignore_warning: True

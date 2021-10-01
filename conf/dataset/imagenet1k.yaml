@@ -1,4 +1,4 @@
-data_dir: gs://jun_tpu0/tfds
+data_dir: gs://justhungryman_tpu3/tfds
 type: tensorflow_dataset
 train:
   name: imagenet2012:5.1.0

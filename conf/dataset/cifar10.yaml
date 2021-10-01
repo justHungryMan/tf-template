@@ -1,4 +1,4 @@
-data_dir: /home/cvip/jun/tfds
+data_dir: gs://justhungryman_tpu3/tfds
 type: tensorflow_dataset
 train:
   name: cifar10:3.0.2

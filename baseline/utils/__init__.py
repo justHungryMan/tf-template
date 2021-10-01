@@ -23,7 +23,7 @@ def get_logger(name=__name__, level=logging.INFO) -> logging.Logger:
 
     logger.setLevel(level)
 
-    # tf.get_logger().setLevel(logging.WARNING)
+    tf.get_logger().setLevel(logging.WARNING)
 
     return logger
 

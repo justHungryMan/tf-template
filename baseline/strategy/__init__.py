@@ -19,7 +19,7 @@ def create(conf):
         policy = tf.keras.mixed_precision.experimental.Policy("mixed_bfloat16")
         tf.keras.mixed_precision.experimental.set_policy(policy)
 
-        log.info("All devices: %s", tf.config.list_logical_devices("TPU"))
+        # log.info("All devices: %s", tf.config.list_logical_devices("TPU"))
     elif conf.mode == "gpus":
         ds_strategy = tf.distribute.MirroredStrategy()
 
@@ -27,7 +27,7 @@ def create(conf):
             policy = tf.keras.mixed_precision.Policy("mixed_float16")
             tf.keras.mixed_precision.set_global_policy(policy)
 
-        log.info("All devices: %s", tf.config.list_physical_devices("GPU"))
+        # log.info("All devices: %s", tf.config.list_physical_devices("GPU"))
     else:
         if tf.config.list_physical_devices("GPU"):
             ds_strategy = tf.distribute.OneDeviceStrategy("device:GPU:0")

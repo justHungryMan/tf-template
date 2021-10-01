@@ -9,4 +9,4 @@ scheduler:
     steps: 140_580
     params:
         boundaries: [42_174, 84_348, 112_464]
-        values: [3e-3, 3e-4, 3e-5, 3e-5]
+        values: [3e-2, 3e-3, 3e-4, 3e-5]

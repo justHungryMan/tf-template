@@ -11,6 +11,7 @@ modules:
   - type: Wandb
     params: 
       monitor: val_loss
+      save_model: False
   # - type: TensorBoard
   #   params:
   #     log_dir: ???
