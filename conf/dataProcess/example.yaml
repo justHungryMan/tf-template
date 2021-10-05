@@ -3,7 +3,7 @@ train:
       - type: random_flip
       - type: cast
         params:
-          type: float16
+          type: bfloat16
       - type: normalize
         params:
           mean: 0.5
@@ -17,7 +17,7 @@ test:
   preprocess:
     - type: cast
       params:
-        type: float16
+        type: bfloat16
     - type: normalize
       params:
         mean: 0.5

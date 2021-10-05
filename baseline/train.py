@@ -177,3 +177,12 @@ class Trainer:
         log.info(
             f'[valid] best accuracy:{max(rv["history"]["val_accuracy"]) * 100:.2f}'
         )
+        
+        if self.conf.get("Wandb"):
+            import wandb
+            wandb.finish()
+
+        # Return metric score for hyperparameter optimization
+        optimized_metric = self.conf.get("optimized_metric")
+        if optimized_metric:
+            return rv["history"][optimized_metric][-1]

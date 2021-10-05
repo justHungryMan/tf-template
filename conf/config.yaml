@@ -6,10 +6,13 @@ defaults:
   - loss: bce.yaml
   - optimizer: sgd.yaml
   - scheduler: warmup_piecewise.yaml
-  - hyperparameter: example.yaml
-  - hydra: defaults.yaml
+  # - hyperparameter: example.yaml
   - callbacks: base.yaml
+
+  - experiment: null
+  - hparams_search: null
   
+  - hydra: defaults.yaml
   - override hydra/job_logging: colorlog
   - override hydra/hydra_logging: colorlog
 

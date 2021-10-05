@@ -48,13 +48,6 @@ def set_environment(config: DictConfig) -> None:
         log.info("Disabling python warnings! <config.base.ignore_warnings=True>")
         warnings.filterwarnings("ignore")
 
-    # Hyperparameter Set
-    new_conf = copy.deepcopy(config)
-    del new_conf.hyperparameter
-
-    replace_item(config.hyperparameter, new_conf)
-    config = new_conf
-
     # disable adding new keys to config
     OmegaConf.set_struct(config, True)
 
