@@ -18,6 +18,7 @@ class Trainer:
         self.strategy = baseline.strategy.create(self.conf["base"]["env"])
 
         self.initial_epoch = 0
+        self.wandb_finish = None
 
     def build_dataset(self):
         dataset = baseline.dataset.create(
@@ -90,6 +91,8 @@ class Trainer:
                 ] = f"{os.path.join(self.conf.base.save_dir, 'logs/fit/')}" + datetime.datetime.now().strftime(
                     "%Y%m%d-%H%M%S"
                 )
+            elif single_conf["type"] == "Wandb":
+                self.wandb_finish = True
 
         callbacks = baseline.callback.create(
             conf=self.conf.callbacks.modules, conf_all=self.conf
@@ -177,9 +180,10 @@ class Trainer:
         log.info(
             f'[valid] best accuracy:{max(rv["history"]["val_accuracy"]) * 100:.2f}'
         )
-        
-        if self.conf.get("Wandb"):
+
+        if self.wandb_finish:
             import wandb
+
             wandb.finish()
 
         # Return metric score for hyperparameter optimization

@@ -28,4 +28,4 @@ scheduler:
     params:
         warmup_step: 1_200
         boundaries: [1_440, 2_880, 3_840]
-        values: [3e-2, 3e-3, 3e-4, 3e-5]
+        values: ???
