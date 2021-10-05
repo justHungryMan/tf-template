@@ -6,7 +6,6 @@ defaults:
   - loss: bce.yaml
   - optimizer: sgd.yaml
   - scheduler: warmup_piecewise.yaml
-  # - hyperparameter: example.yaml
   - callbacks: base.yaml
 
   - experiment: null
