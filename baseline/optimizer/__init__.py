@@ -17,7 +17,7 @@ def create(config, model=None):
         return tfa.optimizers.SGDW(**config["params"])
     elif opt_type == "adam":
         log.info(f"[optimizer] create {opt_type}")
-        return tf.keras.optimizers.Adam()
+        return tf.keras.optimizers.Adam(**config["params"])
     elif opt_type == "adamw":
         log.info(f"[optimizer] create {opt_type}")
         return tfa.optimizers.AdamW(**config["params"])
