@@ -1,0 +1,24 @@
+data_dir: gs://justhungryman_tpu3/tfds
+type: tensorflow_dataset
+train:
+  name: imagenet2012:5.1.0
+  split: "train"  # 49k
+  drop_remainder: True
+
+  repeat: True
+  shuffle: True
+  batch_size: ???
+  
+  preprocess: ???
+  postprocess: ???
+  
+test:
+  name: imagenet2012:5.1.0
+  split: "validation"
+  drop_remainder: False
+
+  batch_size: ???
+
+  preprocess: ???
+  postprocess: ???
+  
